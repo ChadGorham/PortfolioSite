@@ -3,21 +3,6 @@ const bg = document.getElementById('bg-layer');
 const mid = document.getElementById('mid-layer');
 const navLinks = document.querySelectorAll('.nav-links a');
 
-scrollContainer.addEventListener('wheel', (event) => {
-  if (window.innerWidth > 960) {
-    event.preventDefault();
-    scrollContainer.scrollBy({
-      left: event.deltaY * 1.4,
-      behavior: 'smooth'
-    });
-  }
-}, { passive: false });
-
-scrollContainer.addEventListener('scroll', () => {
-  const x = scrollContainer.scrollLeft;
-  bg.style.transform = `translateX(${-x * 0.25}px)`;
-  mid.style.transform = `translateX(${-x * 0.45}px)`;
-});
 
 navLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
