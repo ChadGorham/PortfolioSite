@@ -2,29 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Portfolio</title>
+  <title>Embered Tankard — Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A stylized World of Warcraft inn-themed portfolio with quests, projects, and guild lore.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Chad — Portfolio</h1>
-  </header>
+  <div class="site-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">🍺</span>
+        <div>
+          <h1>Embered Tankard</h1>
+          <p>Tavern of code, quests, and guild tales.</p>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#welcome">Welcome</a>
+        <a href="#hearth">About</a>
+        <a href="#board">Projects</a>
+        <a href="#gallery">Tavern</a>
+        <a href="#scribe">Contact</a>
+      </nav>
+    </header>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Write a short intro here.</p>
-  </section>
+    <div id="bg-layer"></div>
+    <div id="mid-layer"></div>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <ul>
-      <li>Project 1</li>
-      <li>Project 2</li>
-    </ul>
-  </section>
+    <main class="scroll-container">
+      <section class="panel entrance" id="welcome">
+        <div class="content">
+          <span class="panel-label">The Front Door</span>
+          <h1>Step into the Inn</h1>
+          <p>The hearth glows, lanterns sway, and every scroll brings you deeper into a world of crafted code, quests completed, and projects ready for your gaze.</p>
+          <a class="cta-button" href="#board">Read the Notice Board</a>
+        </div>
+      </section>
 
-  <footer>
-    <p>© 2026 Chad</p>
-  </footer>
+      <section class="panel hearth" id="hearth">
+        <div class="content split">
+          <div>
+            <span class="panel-label">By the Hearth</span>
+            <h2>About Me</h2>
+            <p>I'm a creative developer who builds immersive experiences, polished interfaces, and thoughtful tools. My craft blends story, design, and technical skill into a memorable adventure.</p>
+            <ul class="traits">
+              <li><strong>Class:</strong> Full-Stack Adventurer</li>
+              <li><strong>Specialty:</strong> Interactive worlds, UI runes, animation spells</li>
+              <li><strong>Motto:</strong> Build with warmth, polish with purpose.</li>
+            </ul>
+          </div>
+          <div class="portrait-card">
+            <div class="portrait-frame">
+              <div class="portrait-glow"></div>
+              <p>Traveler's portrait</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel board" id="board">
+        <div class="content">
+          <span class="panel-label">The Notice Board</span>
+          <h2>Adventures & Projects</h2>
+          <p>A selection of quests, builds, and collaborations I've completed for fellow guildmates and clients.</p>
+          <div class="cards projects">
+            <article class="project-card">
+              <h3>Guild Portal</h3>
+              <p>A responsive portfolio ritual with parchment-inspired UI, parallax details, and fast loading.</p>
+              <div class="project-meta">React · CSS · Animation</div>
+            </article>
+            <article class="project-card">
+              <h3>Quest Tracker</h3>
+              <p>An interactive task manager styled like a quest log for teams and solo hero journeys.</p>
+              <div class="project-meta">TypeScript · APIs · UX Design</div>
+            </article>
+            <article class="project-card">
+              <h3>Battle-ready Shop</h3>
+              <p>An e-commerce tavern inventory with polished product cards, transitions, and immersive atmosphere.</p>
+              <div class="project-meta">Next.js · Styled Components · Performance</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel gallery" id="gallery">
+        <div class="content">
+          <span class="panel-label">The Tavern</span>
+          <h2>Scenes from the Inn</h2>
+          <p>Scroll through the rooms where the barmaid knows your name, the map table shows your route, and every oak beam echoes with crafted code.</p>
+          <div class="scene-grid">
+            <div class="scene-card scene-fire">Hearthside inspiration</div>
+            <div class="scene-card scene-map">Quest planning table</div>
+            <div class="scene-card scene-barrel">Ale-scented design</div>
+            <div class="scene-card scene-wood">Warm, polished textures</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel scribe" id="scribe">
+        <div class="content split contact-panel">
+          <div>
+            <span class="panel-label">Scribe's Desk</span>
+            <h2>Write to the Innkeeper</h2>
+            <p>Whether you're seeking collaboration, looking for freelance support, or wishing to share a quest, send a raven and let's make something legendary.</p>
+          </div>
+          <div class="contact-list">
+            <div><strong>Guild Hall:</strong> hello@emberedtankard.dev</div>
+            <div><strong>Messenger:</strong> @embered-tankard</div>
+            <div><strong>Scrolls:</strong> Available for web, game UI, and immersive builds.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
