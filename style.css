@@ -7,8 +7,7 @@
 
 html, body {
   height: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   scroll-behavior: smooth;
 }
 
@@ -16,7 +15,6 @@ body {
   font-family: "Cormorant Garamond", Georgia, serif;
   color: #f4e5c1;
   background: #090705;
-  min-height: 100vh;
 }
 
 .site-shell {
@@ -107,6 +105,19 @@ body {
   display: flex;
   width: 500vw;
   min-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .panel {
