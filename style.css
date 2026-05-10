@@ -7,7 +7,8 @@
 
 html, body {
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
@@ -15,6 +16,7 @@ body {
   font-family: "Cormorant Garamond", Georgia, serif;
   color: #f4e5c1;
   background: #090705;
+  min-height: 100vh;
 }
 
 .site-shell {
@@ -82,7 +84,7 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 500vw;
+  width: 100vw;
   height: 100vh;
   z-index: -2;
 }
@@ -103,22 +105,30 @@ body {
 
 .scroll-container {
   display: flex;
-  width: 500vw;
+  flex-direction: column;
+  width: 100vw;
   min-height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
+  overflow-y: auto;
+  scrollbar-width: auto;
 }
 
 .scroll-container::-webkit-scrollbar {
-  display: none;
+  width: 12px;
 }
 
-.scroll-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.scroll-container::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
 }
+width: 100vw;
+  min-croll-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 145, 0.3);
+  border-radius: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 215, 145, 0.5);
+}
+
 
 .panel {
   min-width: 100vw;
@@ -347,7 +357,6 @@ p {
   }
 
   .scroll-container {
-    width: auto;
     flex-direction: column;
     overflow-y: auto;
     overflow-x: hidden;

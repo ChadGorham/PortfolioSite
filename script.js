@@ -1,8 +1,12 @@
-const scrollContainer = document.querySelector('.scroll-container');
 const bg = document.getElementById('bg-layer');
 const mid = document.getElementById('mid-layer');
 const navLinks = document.querySelectorAll('.nav-links a');
 
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  bg.style.transform = `translateY(${-y * 0.25}px)`;
+  mid.style.transform = `translateY(${-y * 0.45}px)`;
+});
 
 navLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
@@ -10,11 +14,7 @@ navLinks.forEach((link) => {
     const targetId = link.getAttribute('href').slice(1);
     const target = document.getElementById(targetId);
     if (target) {
-      if (window.innerWidth > 960) {
-        scrollContainer.scrollTo({ left: target.offsetLeft, top: 0, behavior: 'smooth' });
-      } else {
-        window.scrollTo({ top: target.offsetTop, left: 0, behavior: 'smooth' });
-      }
+      window.scrollTo({ top: target.offsetTop, left: 0, behavior: 'smooth' });
     }
   });
 });
