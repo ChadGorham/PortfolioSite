@@ -1,20 +1,76 @@
-const bg = document.getElementById('bg-layer');
-const mid = document.getElementById('mid-layer');
-const navLinks = document.querySelectorAll('.nav-links a');
+// PARALLAX SCROLLING
+(function () {
+  const container = document.querySelector(".scroll-container");
+  const scenes = document.querySelectorAll(".scene");
 
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  bg.style.transform = `translateY(${-y * 0.25}px)`;
-  mid.style.transform = `translateY(${-y * 0.45}px)`;
-});
+  function updateParallax() {
+    const scrollX = container.scrollLeft;
+    const viewportWidth = window.innerWidth;
 
-navLinks.forEach((link) => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    const targetId = link.getAttribute('href').slice(1);
-    const target = document.getElementById(targetId);
-    if (target) {
-      window.scrollTo({ top: target.offsetTop, left: 0, behavior: 'smooth' });
+    scenes.forEach((scene, index) => {
+      const base = index * viewportWidth;
+      const offset = scrollX - base;
+
+      const back = scene.querySelector(".layer-back");
+      const mid = scene.querySelector(".layer-mid");
+      const front = scene.querySelector(".layer-front");
+
+      if (back) back.style.transform = `translateX(${offset * 0.2}px)`;
+      if (mid) mid.style.transform = `translateX(${offset * 0.4}px)`;
+      if (front) front.style.transform = `translateX(${offset * 0.6}px)`;
+    });
+  }
+
+  container.addEventListener("scroll", updateParallax);
+  window.addEventListener("resize", updateParallax);
+  updateParallax();
+})();
+
+// PROJECT TOOLTIP FOLLOWING CURSOR
+(function () {
+  const cards = document.querySelectorAll(".project-card");
+  const tooltips = document.querySelectorAll(".wow-tooltip");
+
+  function hideAllTooltips() {
+    tooltips.forEach((tip) => {
+      tip.style.opacity = 0;
+    });
+  }
+
+  cards.forEach((card) => {
+    const id = card.getAttribute("data-tooltip-id");
+    const tooltip = document.getElementById(id);
+    if (!tooltip) return;
+
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      tooltip.style.left = `${rect.left + x}px`;
+      tooltip.style.top = `${rect.top + y - 10}px`;
+      tooltip.style.opacity = 1;
+    });
+
+    card.addEventListener("mouseleave", () => {
+      tooltip.style.opacity = 0;
+    });
+  });
+})();
+
+// AMBIENT AUDIO TOGGLE
+(function () {
+  const toggle = document.getElementById("ambientToggle");
+  const audio = document.getElementById("ambientAudio");
+
+  if (!toggle || !audio) return;
+
+  toggle.addEventListener("change", () => {
+    if (toggle.checked) {
+      audio.volume = 0.4;
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
     }
   });
-});
+})();
