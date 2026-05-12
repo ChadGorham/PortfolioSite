@@ -1,76 +1,173 @@
-// PARALLAX SCROLLING
-(function () {
-  const container = document.querySelector(".scroll-container");
-  const scenes = document.querySelectorAll(".scene");
+/* ═══════════════════════════════════════════════
+   CHAD GORHAM PORTFOLIO — SCRIPT
+   ═══════════════════════════════════════════════ */
 
-  function updateParallax() {
-    const scrollX = container.scrollLeft;
-    const viewportWidth = window.innerWidth;
+// ── MAP MODAL ──────────────────────────────────
 
-    scenes.forEach((scene, index) => {
-      const base = index * viewportWidth;
-      const offset = scrollX - base;
+const mapModal   = document.getElementById('mapModal');
+const openMapBtn = document.getElementById('openMap');
+const closeMapBtn= document.getElementById('closeMap');
+const mapTooltip = document.getElementById('mapTooltip');
+const tooltipName= mapTooltip.querySelector('.tooltip-name');
+const tooltipSub = mapTooltip.querySelector('.tooltip-sub');
 
-      const back = scene.querySelector(".layer-back");
-      const mid = scene.querySelector(".layer-mid");
-      const front = scene.querySelector(".layer-front");
+function openMap() {
+  mapModal.classList.add('open');
+  mapModal.removeAttribute('aria-hidden');
+  document.body.style.overflow = 'hidden';
+  closeMapBtn.focus();
+}
 
-      if (back) back.style.transform = `translateX(${offset * 0.2}px)`;
-      if (mid) mid.style.transform = `translateX(${offset * 0.4}px)`;
-      if (front) front.style.transform = `translateX(${offset * 0.6}px)`;
-    });
-  }
+function closeMap() {
+  mapModal.classList.remove('open');
+  mapModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  mapTooltip.style.opacity = '0';
+  openMapBtn.focus();
+}
 
-  container.addEventListener("scroll", updateParallax);
-  window.addEventListener("resize", updateParallax);
-  updateParallax();
-})();
+openMapBtn.addEventListener('click', openMap);
+closeMapBtn.addEventListener('click', closeMap);
 
-// PROJECT TOOLTIP FOLLOWING CURSOR
-(function () {
-  const cards = document.querySelectorAll(".project-card");
-  const tooltips = document.querySelectorAll(".wow-tooltip");
+// Close on backdrop click
+mapModal.addEventListener('click', (e) => {
+  if (e.target === mapModal) closeMap();
+});
 
-  function hideAllTooltips() {
-    tooltips.forEach((tip) => {
-      tip.style.opacity = 0;
-    });
-  }
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && mapModal.classList.contains('open')) closeMap();
+});
 
-  cards.forEach((card) => {
-    const id = card.getAttribute("data-tooltip-id");
-    const tooltip = document.getElementById(id);
-    if (!tooltip) return;
 
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+// ── MAP REGION INTERACTIONS ────────────────────
 
-      tooltip.style.left = `${rect.left + x}px`;
-      tooltip.style.top = `${rect.top + y - 10}px`;
-      tooltip.style.opacity = 1;
-    });
+const regions = document.querySelectorAll('.map-region');
 
-    card.addEventListener("mouseleave", () => {
-      tooltip.style.opacity = 0;
-    });
+regions.forEach(region => {
+
+  region.addEventListener('mousemove', (e) => {
+    tooltipName.textContent = region.dataset.name;
+    tooltipSub.textContent  = region.dataset.subtitle || '';
+    mapTooltip.style.opacity = '1';
+
+    // Keep tooltip inside viewport
+    const tw = 180;
+    const th = 80;
+    let left = e.clientX + 18;
+    let top  = e.clientY + 18;
+    if (left + tw > window.innerWidth  - 12) left = e.clientX - tw - 12;
+    if (top  + th > window.innerHeight - 12) top  = e.clientY - th - 12;
+
+    mapTooltip.style.left = left + 'px';
+    mapTooltip.style.top  = top  + 'px';
   });
-})();
 
-// AMBIENT AUDIO TOGGLE
-(function () {
-  const toggle = document.getElementById("ambientToggle");
-  const audio = document.getElementById("ambientAudio");
+  region.addEventListener('mouseleave', () => {
+    mapTooltip.style.opacity = '0';
+  });
 
-  if (!toggle || !audio) return;
+  region.addEventListener('click', () => {
+    const sectionId = region.dataset.section;
 
-  toggle.addEventListener("change", () => {
-    if (toggle.checked) {
-      audio.volume = 0.4;
-      audio.play().catch(() => {});
-    } else {
-      audio.pause();
+    // Flash effect on click
+    region.classList.add('flash');
+    setTimeout(() => region.classList.remove('flash'), 280);
+
+    // Close modal then scroll to section
+    setTimeout(() => {
+      closeMap();
+      setTimeout(() => {
+        if (sectionId === 'hero') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const target = document.getElementById(sectionId);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 320);
+    }, 220);
+  });
+
+  // Keyboard support
+  region.setAttribute('tabindex', '0');
+  region.setAttribute('role', 'button');
+  region.setAttribute('aria-label',
+    `Navigate to ${region.dataset.name} section`);
+
+  region.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      region.click();
     }
   });
-})();
+});
+
+
+// ── AMBIENT AUDIO ──────────────────────────────
+
+const audio     = document.getElementById('ambientAudio');
+const audioBtn  = document.getElementById('audioToggle');
+const audioIcon = document.getElementById('audioIcon');
+let   audioOn   = false;
+
+audioBtn.addEventListener('click', () => {
+  if (audioOn) {
+    audio.pause();
+    audioIcon.textContent = '♪'; // ♪
+    audioOn = false;
+  } else {
+    audio.volume = 0.28;
+    audio.play().catch(() => {});
+    audioIcon.textContent = '■'; // ■
+    audioOn = true;
+  }
+});
+
+
+// ── SMOOTH ANCHOR SCROLL ───────────────────────
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const id = link.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+
+// ── ACTIVE NAV HIGHLIGHT ───────────────────────
+
+const navLinks   = document.querySelectorAll('.nav-links a');
+const allSections= document.querySelectorAll('section[id]');
+
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle(
+            'active',
+            link.getAttribute('href') === `#${id}`
+          );
+        });
+      }
+    });
+  },
+  { rootMargin: `-${62 + 20}px 0px -55% 0px`, threshold: 0 }
+);
+
+allSections.forEach(s => sectionObserver.observe(s));
+
+
+// ── NAVBAR SCROLL SHADOW ───────────────────────
+
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.style.boxShadow = window.scrollY > 10
+    ? '0 4px 30px rgba(0,0,0,0.9)'
+    : '0 2px 24px rgba(0,0,0,0.85)';
+}, { passive: true });

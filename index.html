@@ -1,461 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Chad Gorham – Portfolio</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<style>
-/* ---------------------------------------------------------
-   GLOBAL WOW UI ENFORCEMENT
---------------------------------------------------------- */
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #1a0f0a !important;
-  color: #f5e9c8 !important;
-  font-family: "Inter", sans-serif;
-  overflow-x: hidden;   /* allow vertical scroll */
-  overflow-y: auto;     /* enable vertical scroll */
-}
-
-* {
-  color: #f5e9c8 !important;
-  background-color: transparent !important;
-  text-shadow: 1px 1px 2px #000 !important;
-  box-sizing: border-box;
-}
-
-/* ---------------------------------------------------------
-   WOW TOP BAR
---------------------------------------------------------- */
-.wow-ui-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 50;
-  pointer-events: none;
-}
-
-.wow-top-bar {
-  pointer-events: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 16px;
-  background: linear-gradient(to bottom, #3a2a1a, #1e140c) !important;
-  border-bottom: 2px solid #c79c6e !important;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.8) !important;
-  font-size: 14px;
-}
-
-.wow-top-bar-left {
-  font-family: "Cinzel", serif;
-  color: #f8e7c0 !important;
-}
-
-/* ---------------------------------------------------------
-   VERTICAL SCENE STACK
---------------------------------------------------------- */
-.scene {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  padding-top: 48px; /* space under top bar */
-  overflow: hidden;
-}
-
-/* ---------------------------------------------------------
-   PARALLAX LAYERS (VERTICAL)
---------------------------------------------------------- */
-.layer {
-  position: absolute;
-  inset: 0;
-  background-size: cover !important;
-  background-position: center !important;
-  pointer-events: none;
-}
-
-/* Replace with your images */
-.entrance-back { background-image: url("img/entrance-back.jpg"); }
-.entrance-mid { background-image: url("img/entrance-mid.png"); }
-.entrance-front { background-image: url("img/entrance-front.png"); }
-
-.hearth-back { background-image: url("img/hearth-back.jpg"); }
-.hearth-mid { background-image: url("img/hearth-mid.png"); }
-.hearth-front { background-image: url("img/hearth-front.png"); }
-
-.common-back { background-image: url("img/common-back.jpg"); }
-.common-mid { background-image: url("img/common-mid.png"); }
-.common-front { background-image: url("img/common-front.png"); }
-
-.map-back { background-image: url("img/map-back.jpg"); }
-.map-mid { background-image: url("img/map-mid.png"); }
-.map-front { background-image: url("img/map-front.png"); }
-
-.contact-back { background-image: url("img/contact-back.jpg"); }
-.contact-mid { background-image: url("img/contact-mid.png"); }
-.contact-front { background-image: url("img/contact-front.png"); }
-
-/* ---------------------------------------------------------
-   CONTENT
---------------------------------------------------------- */
-.content {
-  position: relative;
-  z-index: 10;
-  padding: 64px;
-  max-width: 900px;
-}
-
-/* ---------------------------------------------------------
-   WOW FRAME
---------------------------------------------------------- */
-.wow-frame {
-  background: #3b2717 !important;
-  border: 3px solid #c79c6e !important;
-  box-shadow: 0 0 12px rgba(0,0,0,0.9);
-  padding: 16px;
-  margin-bottom: 32px;
-}
-
-.wow-frame-header {
-  font-family: "Cinzel", serif;
-  font-size: 18px;
-  color: #ffd100 !important;
-  margin-bottom: 8px;
-}
-
-/* ---------------------------------------------------------
-   WOW SIGN BUTTON
---------------------------------------------------------- */
-.wow-sign {
-  padding: 12px 24px;
-  background: linear-gradient(to bottom, #5a3b22, #3b2717) !important;
-  border: 2px solid #c79c6e !important;
-  border-radius: 4px;
-  color: #f8e7c0 !important;
-  font-family: "Cinzel", serif;
-  font-size: 20px;
-  cursor: pointer;
-  display: inline-block;
-  margin-top: 16px;
-}
-
-.wow-sign:hover {
-  filter: brightness(1.15);
-}
-
-/* ---------------------------------------------------------
-   PROJECT CARDS
---------------------------------------------------------- */
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-}
-
-.project-card {
-  padding: 12px;
-  background: rgba(10,7,4,0.85) !important;
-  border: 2px solid #6b4a2a !important;
-  cursor: default;
-}
-
-.project-title {
-  color: #00b4ff !important;
-}
-
-.project-subtitle {
-  color: #e8d8a8 !important;
-}
-
-/* ---------------------------------------------------------
-   TOOLTIP
---------------------------------------------------------- */
-.wow-tooltip {
-  position: absolute;
-  background: rgba(0,0,0,0.95) !important;
-  border: 1px solid #c79c6e !important;
-  padding: 8px 10px;
-  font-size: 12px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(-50%, -100%);
-  transition: opacity 0.1s ease-out;
-  z-index: 40;
-}
-
-.tooltip-title {
-  color: #ffd100 !important;
-}
-
-/* ---------------------------------------------------------
-   FORM
---------------------------------------------------------- */
-.wow-form input,
-.wow-form textarea {
-  background: #120b06 !important;
-  border: 1px solid #6b4a2a !important;
-  color: #f5e9c8 !important;
-  width: 100%;
-  margin-top: 4px;
-}
-
-.wow-button {
-  padding: 8px 20px;
-  background: linear-gradient(to bottom, #5a3b22, #3b2717) !important;
-  border: 2px solid #c79c6e !important;
-  color: #ffd100 !important;
-  font-family: "Cinzel", serif;
-  cursor: pointer;
-  margin-top: 12px;
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chad Gorham — Software Engineer Portfolio">
+  <title>Chad Gorham — Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- ============================================================
-     WOW TOP BAR
-============================================================ -->
-<div class="wow-ui-overlay">
-  <div class="wow-top-bar">
-    <div class="wow-top-bar-left">Chad Gorham</div>
-  </div>
-</div>
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">Chad Gorham</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="map-btn" id="openMap" aria-label="Open world map">
+      &#9876; Map
+    </button>
+  </nav>
 
-<!-- ============================================================
-     VERTICAL SCROLL WORLD
-============================================================ -->
-
-<!-- SCENE 1 — ENTRANCE -->
-<section class="scene entrance">
-  <div class="layer entrance-back"></div>
-  <div class="layer entrance-mid"></div>
-  <div class="layer entrance-front"></div>
-
-  <div class="content">
-    <div class="wow-frame">
-      <div class="wow-frame-header">Portfolio Site</div>
-      <div class="wow-frame-body">
-        <h1>Welcome</h1>
-        <p>This is my portfolio site where I showcase some of my work, skills, and a little bit about myself.</p>
+  <!-- ═══ HERO ═══ -->
+  <section id="hero" class="hero">
+    <div class="hero-rays"></div>
+    <div class="hero-content">
+      <div class="hero-ornament">&#9868;</div>
+      <h1 class="hero-title">Chad Gorham</h1>
+      <p class="hero-subtitle">Software Engineer</p>
+      <div class="hero-divider">
+        <span class="divider-gem">&#9670;</span>
       </div>
+      <p class="hero-tagline">Forging elegant solutions from the fires of code</p>
+      <a href="#about" class="hero-cta">Enter the Realm</a>
     </div>
+    <button class="audio-btn" id="audioToggle" title="Toggle ambient music">
+      <span id="audioIcon">&#9834;</span>
+    </button>
+    <div class="hero-scroll-hint">&#8964;</div>
+  </section>
 
-    <div class="wow-sign" id="enterBtn">Enter</div>
-  </div>
-</section>
-
-<!-- SCENE 2 — HEARTH -->
-<section class="scene hearth">
-  <div class="layer hearth-back"></div>
-  <div class="layer hearth-mid"></div>
-  <div class="layer hearth-front"></div>
-
-  <div class="content">
-    <div class="wow-frame">
-      <div class="wow-frame-header">About Me</div>
-      <div class="wow-frame-body">
-        <h2>About Me</h2>
-        <p>I'm a software developer based in the bay area with a passion for creating efficient and scalable solutions.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SCENE 3 — PROJECTS -->
-<section class="scene commonroom">
-  <div class="layer common-back"></div>
-  <div class="layer common-mid"></div>
-  <div class="layer common-front"></div>
-
-  <div class="content">
-    <div class="wow-frame">
-      <div class="wow-frame-header">Work & Projects</div>
-      <div class="wow-frame-body">
-        <h2>Common Room</h2>
-
-        <div class="project-grid">
-
-          <div class="project-card" data-tooltip-id="project-1">
-            <div class="project-title">Automation Forge</div>
-            <div class="project-subtitle">Item Level 450</div>
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" class="section">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-ornament">&#9868;</span>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-divider"></div>
+      </header>
+      <div class="about-content">
+        <div class="about-portrait">
+          <div class="portrait-frame">
+            <div class="portrait-placeholder">CG</div>
           </div>
-
-          <div class="project-card" data-tooltip-id="project-2">
-            <div class="project-title">Secure Relay</div>
-            <div class="project-subtitle">Item Level 440</div>
-          </div>
-
-          <div class="project-card" data-tooltip-id="project-3">
-            <div class="project-title">Insight Ledger</div>
-            <div class="project-subtitle">Item Level 435</div>
-          </div>
-
         </div>
-
-      </div>
-    </div>
-
-    <!-- Tooltips -->
-    <div class="wow-tooltip" id="project-1">
-      <div class="tooltip-title">Automation Forge</div>
-      <div class="tooltip-body">Automation pipelines forged in dwarven steel.</div>
-    </div>
-
-    <div class="wow-tooltip" id="project-2">
-      <div class="tooltip-title">Secure Relay</div>
-      <div class="tooltip-body">A secure messaging and auth layer.</div>
-    </div>
-
-    <div class="wow-tooltip" id="project-3">
-      <div class="tooltip-title">Insight Ledger</div>
-      <div class="tooltip-body">Analytics carved into stone.</div>
-    </div>
-
-  </div>
-</section>
-
-<!-- SCENE 4 — MAP ROOM -->
-<section class="scene maproom">
-  <div class="layer map-back"></div>
-  <div class="layer map-mid"></div>
-  <div class="layer map-front"></div>
-
-  <div class="content">
-    <div class="wow-frame">
-      <div class="wow-frame-header">Journey</div>
-      <div class="wow-frame-body">
-        <h2>Map Room</h2>
-
-        <div class="map-table">
-          <div class="map-rune" data-tooltip="Apprentice"></div>
-          <div class="map-rune map-rune-mid" data-tooltip="Journeyman"></div>
-          <div class="map-rune map-rune-high" data-tooltip="Steward"></div>
+        <div class="about-text">
+          <p>
+            Greetings, traveler. I am Chad Gorham, a software engineer with a
+            passion for crafting robust, elegant, and purposeful digital solutions.
+          </p>
+          <p>
+            My journey through the realm of software has taken me across many
+            disciplines — from frontend development to backend architecture,
+            database design to cloud infrastructure. I approach each challenge
+            with methodical precision and creative determination.
+          </p>
+          <p>
+            I am currently seeking new opportunities where I can bring my skills
+            to bear on meaningful problems, collaborate with talented teams, and
+            continue growing as an engineer.
+          </p>
+          <div class="about-links">
+            <a href="https://github.com/gorhamchadsbhs" class="about-link" target="_blank" rel="noopener">
+              GitHub
+            </a>
+            <a href="#contact" class="about-link">Get in Touch</a>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SKILLS ═══ -->
+  <section id="skills" class="section section-alt">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-ornament">&#9868;</span>
+        <h2 class="section-title">Skills</h2>
+        <div class="section-divider"></div>
+      </header>
+      <div class="skills-grid">
+        <div class="skill-category">
+          <h3 class="skill-cat-title">Languages</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Python</li>
+            <li class="skill-item">JavaScript</li>
+            <li class="skill-item">TypeScript</li>
+            <li class="skill-item">Java</li>
+            <li class="skill-item">C / C++</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3 class="skill-cat-title">Frontend</h3>
+          <ul class="skill-list">
+            <li class="skill-item">React</li>
+            <li class="skill-item">HTML5 &amp; CSS3</li>
+            <li class="skill-item">Tailwind CSS</li>
+            <li class="skill-item">SVG &amp; Canvas</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3 class="skill-cat-title">Backend</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Node.js</li>
+            <li class="skill-item">REST APIs</li>
+            <li class="skill-item">SQL / PostgreSQL</li>
+            <li class="skill-item">Flask / FastAPI</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3 class="skill-cat-title">Tools &amp; Platforms</h3>
+          <ul class="skill-list">
+            <li class="skill-item">Git &amp; GitHub</li>
+            <li class="skill-item">Docker</li>
+            <li class="skill-item">AWS</li>
+            <li class="skill-item">Linux</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ GALLERY ═══ -->
+  <section id="gallery" class="section">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-ornament">&#9868;</span>
+        <h2 class="section-title">Gallery</h2>
+        <div class="section-divider"></div>
+      </header>
+      <p class="gallery-intro">
+        A visual chronicle of works — replace these placeholders with screenshots
+        or previews from your GitHub projects.
+      </p>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-placeholder">Project Preview</div>
+          <p class="gallery-caption">Project Alpha</p>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">Project Preview</div>
+          <p class="gallery-caption">Project Beta</p>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">Project Preview</div>
+          <p class="gallery-caption">Project Gamma</p>
+        </div>
+        <div class="gallery-item">
+          <div class="gallery-placeholder">Project Preview</div>
+          <p class="gallery-caption">Project Delta</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJECTS ═══ -->
+  <section id="projects" class="section">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-ornament">&#9868;</span>
+        <h2 class="section-title">Projects</h2>
+        <div class="section-divider"></div>
+      </header>
+      <div class="projects-grid">
+
+        <article class="project-card">
+          <div class="project-card-header">
+            <h3 class="project-title">Project Title</h3>
+            <span class="project-badge">Web App</span>
+          </div>
+          <p class="project-desc">
+            A description of this project — what it does, the problem it solves,
+            and what makes it noteworthy. Update this with your actual project.
+          </p>
+          <div class="project-tags">
+            <span class="tag">React</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+          </div>
+          <a href="https://github.com/gorhamchadsbhs" class="project-link" target="_blank" rel="noopener">
+            View on GitHub &#8594;
+          </a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-header">
+            <h3 class="project-title">Project Title</h3>
+            <span class="project-badge">API</span>
+          </div>
+          <p class="project-desc">
+            Another project description showcasing a different skill set or
+            domain. Replace with your actual GitHub projects.
+          </p>
+          <div class="project-tags">
+            <span class="tag">Python</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Docker</span>
+          </div>
+          <a href="https://github.com/gorhamchadsbhs" class="project-link" target="_blank" rel="noopener">
+            View on GitHub &#8594;
+          </a>
+        </article>
+
+        <article class="project-card">
+          <div class="project-card-header">
+            <h3 class="project-title">Project Title</h3>
+            <span class="project-badge">Tool</span>
+          </div>
+          <p class="project-desc">
+            A third project to round out the grid. Add as many cards as you need
+            to represent your GitHub work.
+          </p>
+          <div class="project-tags">
+            <span class="tag">TypeScript</span>
+            <span class="tag">AWS</span>
+          </div>
+          <a href="https://github.com/gorhamchadsbhs" class="project-link" target="_blank" rel="noopener">
+            View on GitHub &#8594;
+          </a>
+        </article>
 
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- SCENE 5 — CONTACT -->
-<section class="scene contact">
-  <div class="layer contact-back"></div>
-  <div class="layer contact-mid"></div>
-  <div class="layer contact-front"></div>
-
-  <div class="content">
-    <div class="wow-frame">
-      <div class="wow-frame-header">Contact</div>
-      <div class="wow-frame-body">
-        <h2>Back Room</h2>
-
-        <form class="wow-form">
-          <label>Name <input type="text"></label>
-          <label>Email <input type="email"></label>
-          <label>Message <textarea rows="4"></textarea></label>
-          <button class="wow-button">Accept Quest</button>
-        </form>
-
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="section section-alt">
+    <div class="section-inner">
+      <header class="section-header">
+        <span class="section-ornament">&#9868;</span>
+        <h2 class="section-title">Contact</h2>
+        <div class="section-divider"></div>
+      </header>
+      <div class="contact-content">
+        <p class="contact-intro">
+          Send a raven, leave word at the inn, or seek me through these channels:
+        </p>
+        <div class="contact-links">
+          <a href="mailto:gorhamchadsbhs@gmail.com" class="contact-link">
+            <span class="contact-icon">&#9993;</span>
+            gorhamchadsbhs@gmail.com
+          </a>
+          <a href="https://github.com/gorhamchadsbhs" class="contact-link" target="_blank" rel="noopener">
+            <span class="contact-icon">&#9876;</span>
+            GitHub
+          </a>
+          <a href="https://linkedin.com/in/chad-gorham" class="contact-link" target="_blank" rel="noopener">
+            <span class="contact-icon">&#9868;</span>
+            LinkedIn
+          </a>
+        </div>
       </div>
     </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-ornament">&#9670;</span>
+      <p>Chad Gorham &copy; 2025 &mdash; Forged with Code</p>
+      <span class="footer-ornament">&#9670;</span>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- MAP MODAL                                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div id="mapModal" class="map-modal" aria-hidden="true" role="dialog" aria-label="World Map">
+    <div class="map-modal-inner">
+
+      <div class="map-title-bar">
+        <div class="map-title-decor">&#9670;&#9670;&#9670;</div>
+        <span class="map-modal-title">World Map</span>
+        <div class="map-title-decor">&#9670;&#9670;&#9670;</div>
+      </div>
+      <button class="map-close" id="closeMap" aria-label="Close map">&#10005;</button>
+
+      <!-- ═══ THE MAP SVG ═══ -->
+      <svg
+        class="map-svg"
+        viewBox="0 0 1536 1024"
+        xmlns="http://www.w3.org/2000/svg"
+        preserveAspectRatio="xMidYMid meet"
+      >
+
+        <!-- Map image -->
+        <image
+          href="assets/images/map.png"
+          x="0" y="0"
+          width="1536" height="1024"
+          preserveAspectRatio="xMidYMid meet"
+        />
+
+        <!--
+          Zone polygons: transparent by default, gold-highlight on hover.
+          Coordinates calibrated to the actual map.png layout (1536×1024).
+          Zones match the labeled islands on the image.
+        -->
+
+        <!-- HOME — upper-left island (mountains + small settlement) -->
+        <polygon
+          class="map-region"
+          data-section="hero"
+          data-name="Home"
+          data-subtitle="Return to the beginning"
+          points="108,290 295,248 538,268 672,360 638,538 445,622 215,602 105,498"
+        />
+
+        <!-- GALLERY — upper-right island (larger mountain range) -->
+        <polygon
+          class="map-region"
+          data-section="gallery"
+          data-name="Gallery"
+          data-subtitle="Project Showcase"
+          points="978,202 1185,165 1462,195 1512,362 1482,548 1292,618 1062,578 958,412"
+        />
+
+        <!-- SKILLS — center island (large, castle tower) -->
+        <polygon
+          class="map-region"
+          data-section="skills"
+          data-name="Skills"
+          data-subtitle="Mastered Abilities"
+          points="582,405 762,352 1008,365 1108,448 1088,658 905,742 728,722 592,632"
+        />
+
+        <!-- ABOUT ME — left-center island (trees, open land) -->
+        <polygon
+          class="map-region"
+          data-section="about"
+          data-name="About Me"
+          data-subtitle="My Background"
+          points="58,630 248,592 512,602 698,682 662,838 428,898 188,878 55,782"
+        />
+
+        <!-- PROJECTS — right-center island (city / buildings) -->
+        <polygon
+          class="map-region"
+          data-section="projects"
+          data-name="Projects"
+          data-subtitle="Completed Quests"
+          points="962,632 1155,592 1448,605 1515,695 1482,848 1262,918 1018,892 885,795"
+        />
+
+        <!-- CONTACT — lower-center island (coastal buildings) -->
+        <polygon
+          class="map-region"
+          data-section="contact"
+          data-name="Contact"
+          data-subtitle="Send a Message"
+          points="742,848 928,812 1152,818 1392,882 1358,978 1078,1002 812,985 718,918"
+        />
+
+      </svg>
+      <!-- ═══ END MAP SVG ═══ -->
+
+      <!-- Map Tooltip -->
+      <div id="mapTooltip" class="map-tooltip" aria-hidden="true">
+        <div class="tooltip-name"></div>
+        <div class="tooltip-sub"></div>
+        <div class="tooltip-hint">Click to travel</div>
+      </div>
+
+    </div>
   </div>
-</section>
+  <!-- END MAP MODAL -->
 
-<!-- ============================================================
-     AMBIENT AUDIO
-============================================================ -->
-<audio id="ambientAudio" loop>
-  <source src="assets/audio/tavern-ambient.mp3" type="audio/mpeg" />
-</audio>
+  <audio id="ambientAudio" loop>
+    <source src="assets/audio/tavern-ambient.mp3" type="audio/mpeg">
+  </audio>
 
-<div class="ambient-toggle" style="position:fixed;bottom:10px;right:10px;">
-  <label>
-    <input type="checkbox" id="ambientToggle" />
-    Ambient tavern sound
-  </label>
-</div>
-
-<!-- ============================================================
-     SCRIPT (VERTICAL PARALLAX + TOOLTIP + AUDIO)
-============================================================ -->
-<script>
-/* ---------------------------------------------------------
-   ENTER BUTTON SCROLLS TO NEXT SCENE
---------------------------------------------------------- */
-document.getElementById("enterBtn").addEventListener("click", () => {
-  window.scrollTo({
-    top: window.innerHeight,
-    behavior: "smooth"
-  });
-});
-
-/* ---------------------------------------------------------
-   VERTICAL PARALLAX
---------------------------------------------------------- */
-const scenes = document.querySelectorAll(".scene");
-
-function updateParallax() {
-  const scrollY = window.scrollY;
-  const vh = window.innerHeight;
-
-  scenes.forEach((scene, i) => {
-    const base = i * vh;
-    const offset = scrollY - base;
-
-    const back = scene.querySelector(".layer-back");
-    const mid = scene.querySelector(".layer-mid");
-    const front = scene.querySelector(".layer-front");
-
-    if (back) back.style.transform = `translateY(${offset * 0.15}px)`;
-    if (mid) mid.style.transform = `translateY(${offset * 0.35}px)`;
-    if (front) front.style.transform = `translateY(${offset * 0.55}px)`;
-  });
-}
-
-window.addEventListener("scroll", updateParallax);
-window.addEventListener("resize", updateParallax);
-updateParallax();
-
-/* ---------------------------------------------------------
-   PROJECT TOOLTIP FOLLOW CURSOR
---------------------------------------------------------- */
-const cards = document.querySelectorAll(".project-card");
-
-cards.forEach(card => {
-  const id = card.getAttribute("data-tooltip-id");
-  const tip = document.getElementById(id);
-  if (!tip) return;
-
-  card.addEventListener("mousemove", e => {
-    tip.style.left = e.pageX + "px";
-    tip.style.top = (e.pageY - 20) + "px";
-    tip.style.opacity = 1;
-  });
-
-  card.addEventListener("mouseleave", () => {
-    tip.style.opacity = 0;
-  });
-});
-
-/* ---------------------------------------------------------
-   AMBIENT AUDIO
---------------------------------------------------------- */
-const toggle = document.getElementById("ambientToggle");
-const audio = document.getElementById("ambientAudio");
-
-toggle.addEventListener("change", () => {
-  if (toggle.checked) {
-    audio.volume = 0.4;
-    audio.play().catch(() => {});
-  } else {
-    audio.pause();
-  }
-});
-</script>
-
+  <script src="script.js"></script>
 </body>
 </html>
