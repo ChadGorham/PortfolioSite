@@ -90,14 +90,30 @@ body {
 }
 
 .nav-logo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  user-select: none;
+  text-decoration: none;
+  gap: 1px;
+}
+
+.nav-name {
   font-family: var(--font-title);
-  font-size: 1.15rem;
+  font-size: 1.0rem;
   font-weight: 700;
   color: var(--gold);
   letter-spacing: 0.06em;
   text-shadow: var(--glow-gold);
-  text-decoration: none;
-  user-select: none;
+}
+
+.nav-title {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-style: italic;
+  color: #a335ee;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 10px rgba(163,53,238,0.45);
 }
 
 .nav-links {
@@ -352,6 +368,68 @@ body {
   user-select: none;
 }
 
+/* Animated torches */
+.hero-torch {
+  position: absolute;
+  top: calc(var(--nav-h) + 72px);
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.hero-torch--l { left: 64px; }
+.hero-torch--r { right: 64px; }
+
+.torch-stick {
+  width: 14px;
+  height: 52px;
+  background: linear-gradient(to bottom, #6b3a18 0%, #4a2210 60%, #2a1008 100%);
+  border-radius: 3px 3px 1px 1px;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 2px 3px 8px rgba(0,0,0,0.6);
+}
+
+.torch-stick::before {
+  content: '';
+  position: absolute;
+  top: -8px; left: -5px;
+  width: 24px; height: 16px;
+  background: linear-gradient(to bottom, #5a2c10, #3a1808);
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 2px 4px rgba(255,160,0,0.2);
+}
+
+.torch-flame {
+  width: 24px;
+  margin: 0 auto;
+  position: relative;
+  height: 40px;
+  animation: torchFlicker 0.65s ease-in-out infinite alternate;
+}
+
+.torch-flame::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 20px; height: 36px;
+  background: radial-gradient(ellipse at 50% 100%, #ff8800 0%, #ffcc00 40%, rgba(255,220,0,0.3) 75%, transparent 100%);
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  filter: blur(2px);
+}
+
+.torch-flame::after {
+  content: '';
+  position: absolute;
+  bottom: 4px; left: 50%;
+  transform: translateX(-50%);
+  width: 10px; height: 22px;
+  background: radial-gradient(ellipse at 50% 90%, #fff 0%, #ffe066 50%, rgba(255,200,0,0.4) 100%);
+  border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+  filter: blur(1px);
+}
+
 
 /* ════════════════════════════════════════
    SECTIONS — BASE
@@ -359,10 +437,52 @@ body {
 .section {
   padding: 86px 40px;
   background-color: var(--bg-stone);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 34px,
+      rgba(0,0,0,0.13) 34px, rgba(0,0,0,0.13) 36px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px, transparent 62px,
+      rgba(0,0,0,0.06) 62px, rgba(0,0,0,0.06) 64px
+    );
+  background-attachment: fixed;
+  position: relative;
 }
 
 .section-alt {
   background-color: var(--bg-panel);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 42px,
+      rgba(60,30,10,0.14) 42px, rgba(60,30,10,0.14) 44px
+    ),
+    repeating-linear-gradient(
+      1.5deg,
+      transparent 0px, transparent 7px,
+      rgba(0,0,0,0.05) 7px, rgba(0,0,0,0.05) 8px
+    );
+  background-attachment: fixed;
+}
+
+/* Projects section — dark weathered wood guild board */
+#projects {
+  background-color: #130800;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px, transparent 52px,
+      rgba(80,45,10,0.22) 52px, rgba(80,45,10,0.22) 54px
+    ),
+    repeating-linear-gradient(
+      1deg,
+      transparent 0px, transparent 5px,
+      rgba(0,0,0,0.1) 5px, rgba(0,0,0,0.1) 6px
+    );
+  background-attachment: fixed;
 }
 
 /* Stone-seam top edge */
@@ -604,45 +724,86 @@ body {
 
 
 /* ════════════════════════════════════════
-   PROJECTS
+   PROJECTS — GUILD BOARD SCROLLS
    ════════════════════════════════════════ */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 28px;
+  gap: 56px 36px;
+  padding: 28px 20px 44px;
+  align-items: start;
 }
 
 .project-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-dim);
-  border-radius: 3px;
-  padding: 28px;
+  position: relative;
+  background: linear-gradient(
+    165deg,
+    #d8be9a 0%, #ccaa74 18%,
+    #d4b786 50%, #c6a268 82%, #bc9658 100%
+  );
+  border: none;
+  border-radius: 0;
+  padding: 48px 30px 48px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.25s ease, border-color 0.25s, box-shadow 0.25s;
-  position: relative;
-  overflow: hidden;
+  gap: 14px;
+  box-shadow:
+    4px 6px 22px rgba(0,0,0,0.75),
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 0 45px rgba(0,0,0,0.08);
+  overflow: visible;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease;
 }
 
-.project-card::before {
+.project-card:nth-child(1) { transform: rotate(-1.8deg); }
+.project-card:nth-child(2) { transform: rotate(1.2deg); }
+.project-card:nth-child(3) { transform: rotate(-0.7deg); }
+
+/* Wooden scroll rods */
+.project-card::before,
+.project-card::after {
   content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(to right, var(--gold-dark), var(--gold-dim), var(--gold-dark));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
+  position: absolute;
+  left: -14px; right: -14px;
+  height: 24px;
+  background: linear-gradient(
+    to bottom,
+    #7a4420 0%, #a06030 25%, #b87838 50%, #8a4e1e 75%, #5a2c0e 100%
+  );
+  border-radius: 12px;
+  box-shadow:
+    3px 4px 10px rgba(0,0,0,0.65),
+    inset 0 3px 5px rgba(255,255,255,0.14),
+    inset 0 -3px 5px rgba(0,0,0,0.35);
+  z-index: 2;
 }
+
+.project-card::before { top: -12px; }
+.project-card::after  { bottom: -12px; }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  border-color: var(--border);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.65), 0 0 22px rgba(255,215,0,0.08);
+  transform: rotate(0deg) translateY(-12px);
+  box-shadow:
+    8px 18px 45px rgba(0,0,0,0.88),
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 0 45px rgba(0,0,0,0.08);
 }
 
-.project-card:hover::before { transform: scaleX(1); }
+/* Gold thumbtack pin */
+.project-pin {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px; height: 20px;
+  background: radial-gradient(circle at 38% 32%, #ffe870, #c79c00 55%, #8b6914 85%);
+  border-radius: 50%;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.65),
+    inset 0 1px 4px rgba(255,255,255,0.45),
+    inset 0 -1px 3px rgba(0,0,0,0.3);
+  z-index: 10;
+}
 
 .project-card-header {
   display: flex;
@@ -655,7 +816,7 @@ body {
   font-family: var(--font-title);
   font-size: 1.08rem;
   font-weight: 700;
-  color: var(--gold);
+  color: #1e0c02;
   letter-spacing: 0.04em;
 }
 
@@ -665,9 +826,9 @@ body {
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-muted);
-  background: rgba(139,105,20,0.15);
-  border: 1px solid var(--border-dim);
+  color: #5a2c08;
+  background: rgba(80,40,0,0.16);
+  border: 1px solid rgba(80,40,0,0.32);
   padding: 3px 9px;
   border-radius: 2px;
   white-space: nowrap;
@@ -675,7 +836,7 @@ body {
 }
 
 .project-desc {
-  color: var(--text-sub);
+  color: #3d200c;
   font-size: 0.96rem;
   flex: 1;
 }
@@ -691,9 +852,9 @@ body {
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--gold-dark);
-  background: rgba(139,105,20,0.12);
-  border: 1px solid var(--border-dim);
+  color: #5a2c08;
+  background: rgba(80,40,0,0.12);
+  border: 1px solid rgba(80,40,0,0.28);
   padding: 3px 9px;
   border-radius: 2px;
 }
@@ -702,14 +863,14 @@ body {
   font-family: var(--font-title);
   font-size: 0.84rem;
   font-weight: 600;
-  color: var(--gold-dim);
+  color: #7a3812;
   text-decoration: none;
   letter-spacing: 0.05em;
   transition: color 0.2s;
   margin-top: auto;
 }
 
-.project-link:hover { color: var(--gold); }
+.project-link:hover { color: #1e0c02; }
 
 
 /* ════════════════════════════════════════
@@ -907,23 +1068,27 @@ body {
   max-height: calc(94vh - 52px);
 }
 
-/* Region hover / click */
+/* Region hover / click — soft glow, no hard border */
 .map-region {
   fill: rgba(255,215,0,0);
-  stroke: rgba(199,156,110,0);
-  stroke-width: 3;
+  stroke: none;
   cursor: pointer;
-  transition: fill 0.18s ease, stroke 0.18s ease;
+  transition: fill 0.22s ease, filter 0.22s ease;
 }
 
 .map-region:hover {
-  fill: rgba(255,215,0,0.17);
-  stroke: rgba(255,210,0,0.65);
+  fill: rgba(255,215,0,0.13);
+  filter:
+    drop-shadow(0 0 6px rgba(255,215,0,0.95))
+    drop-shadow(0 0 18px rgba(255,200,0,0.55))
+    drop-shadow(0 0 42px rgba(255,180,0,0.22));
 }
 
 .map-region.flash {
-  fill: rgba(255,255,180,0.48);
-  stroke: rgba(255,255,0,0.95);
+  fill: rgba(255,255,180,0.42);
+  filter:
+    drop-shadow(0 0 14px rgba(255,255,0,1))
+    drop-shadow(0 0 36px rgba(255,215,0,0.8));
   transition: none;
 }
 
@@ -1019,6 +1184,14 @@ body {
   }
 }
 
+@keyframes torchFlicker {
+  0%   { transform: scaleX(1)    scaleY(1)    rotate(-3deg); }
+  25%  { transform: scaleX(0.88) scaleY(1.06) rotate( 2deg); }
+  50%  { transform: scaleX(1.1)  scaleY(0.94) rotate(-1deg); }
+  75%  { transform: scaleX(0.93) scaleY(1.04) rotate( 3deg); }
+  100% { transform: scaleX(1)    scaleY(1)    rotate(-2deg); }
+}
+
 
 /* ════════════════════════════════════════
    RESPONSIVE
@@ -1026,6 +1199,8 @@ body {
 @media (max-width: 820px) {
   .navbar { padding: 0 20px; }
   .nav-links { display: none; }
+
+  .hero-torch { display: none; }
 
   .section { padding: 64px 24px; }
 

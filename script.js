@@ -116,7 +116,7 @@ audioBtn.addEventListener('click', () => {
     audioIcon.textContent = '♪'; // ♪
     audioOn = false;
   } else {
-    audio.volume = 0.28;
+    audio.volume = 0.06;
     audio.play().catch(() => {});
     audioIcon.textContent = '■'; // ■
     audioOn = true;
@@ -161,6 +161,28 @@ const sectionObserver = new IntersectionObserver(
 );
 
 allSections.forEach(s => sectionObserver.observe(s));
+
+
+// ── PARALLAX ELEMENTS ─────────────────────────
+
+const parallaxEls = document.querySelectorAll('[data-parallax-speed]');
+let parallaxTicking = false;
+
+function runParallax() {
+  const sy = window.scrollY;
+  parallaxEls.forEach(el => {
+    const speed = parseFloat(el.dataset.parallaxSpeed) || 0;
+    el.style.transform = `translateY(${sy * speed}px)`;
+  });
+  parallaxTicking = false;
+}
+
+if (parallaxEls.length) {
+  window.addEventListener('scroll', () => {
+    if (!parallaxTicking) { requestAnimationFrame(runParallax); parallaxTicking = true; }
+  }, { passive: true });
+  runParallax();
+}
 
 
 // ── NAVBAR SCROLL SHADOW ───────────────────────

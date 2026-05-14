@@ -15,7 +15,10 @@
 
   <!-- ═══ NAVIGATION ═══ -->
   <nav class="navbar" id="navbar">
-    <div class="nav-logo">Chad Gorham</div>
+    <div class="nav-logo">
+      <span class="nav-name">Chad Gorham</span>
+      <span class="nav-title">Software Engineer</span>
+    </div>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -31,6 +34,16 @@
   <!-- ═══ HERO ═══ -->
   <section id="hero" class="hero">
     <div class="hero-rays"></div>
+
+    <div class="hero-torch hero-torch--l" aria-hidden="true">
+      <div class="torch-flame"></div>
+      <div class="torch-stick"></div>
+    </div>
+    <div class="hero-torch hero-torch--r" aria-hidden="true">
+      <div class="torch-flame"></div>
+      <div class="torch-stick"></div>
+    </div>
+
     <div class="hero-content">
       <div class="hero-ornament">&#9868;</div>
       <h1 class="hero-title">Chad Gorham</h1>
@@ -38,8 +51,8 @@
       <div class="hero-divider">
         <span class="divider-gem">&#9670;</span>
       </div>
-      <p class="hero-tagline">Forging elegant solutions from the fires of code</p>
-      <a href="#about" class="hero-cta">Enter the Realm</a>
+      <p class="hero-tagline">I like to write code and find neat solutions to interesting problems.</p>
+      <a href="#about" class="hero-cta">Take a Look</a>
     </div>
     <button class="audio-btn" id="audioToggle" title="Toggle ambient music">
       <span id="audioIcon">&#9834;</span>
@@ -63,11 +76,11 @@
         </div>
         <div class="about-text">
           <p>
-            Greetings, traveler. I am Chad Gorham, a software engineer with a
+            I am Chad Gorham, a software engineer with a
             passion for crafting robust, elegant, and purposeful digital solutions.
           </p>
           <p>
-            My journey through the realm of software has taken me across many
+            My journey through the world of software has taken me across many
             disciplines — from frontend development to backend architecture,
             database design to cloud infrastructure. I approach each challenge
             with methodical precision and creative determination.
@@ -78,7 +91,7 @@
             continue growing as an engineer.
           </p>
           <div class="about-links">
-            <a href="https://github.com/gorhamchadsbhs" class="about-link" target="_blank" rel="noopener">
+            <a href="https://github.com/ChadGorham" class="about-link" target="_blank" rel="noopener">
               GitHub
             </a>
             <a href="#contact" class="about-link">Get in Touch</a>
@@ -182,6 +195,7 @@
       <div class="projects-grid">
 
         <article class="project-card">
+          <div class="project-pin" aria-hidden="true"></div>
           <div class="project-card-header">
             <h3 class="project-title">Project Title</h3>
             <span class="project-badge">Web App</span>
@@ -201,6 +215,7 @@
         </article>
 
         <article class="project-card">
+          <div class="project-pin" aria-hidden="true"></div>
           <div class="project-card-header">
             <h3 class="project-title">Project Title</h3>
             <span class="project-badge">API</span>
@@ -220,6 +235,7 @@
         </article>
 
         <article class="project-card">
+          <div class="project-pin" aria-hidden="true"></div>
           <div class="project-card-header">
             <h3 class="project-title">Project Title</h3>
             <span class="project-badge">Tool</span>
