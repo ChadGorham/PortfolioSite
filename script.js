@@ -12,6 +12,9 @@ const tooltipName= mapTooltip.querySelector('.tooltip-name');
 const tooltipSub = mapTooltip.querySelector('.tooltip-sub');
 
 function openMap() {
+  mapAudio.currentTime = 0;
+  mapAudio.volume = 0.12;
+  mapAudio.play().catch(() => {});
   mapModal.classList.add('open');
   mapModal.removeAttribute('aria-hidden');
   document.body.style.overflow = 'hidden';
@@ -112,6 +115,7 @@ const audio     = document.getElementById('ambientAudio');
 const audioBtn  = document.getElementById('audioToggle');
 const audioIcon = document.getElementById('audioIcon');
 const teleportAudio = document.getElementById('teleportAudio');
+const mapAudio = document.getElementById('mapAudio');
 let   audioOn   = false;
 
 audioBtn.addEventListener('click', () => {
