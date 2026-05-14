@@ -68,6 +68,9 @@ regions.forEach(region => {
   });
 
   region.addEventListener('click', () => {
+    teleportAudio.currentTime = 0;
+    teleportAudio.volume = 0.12;
+    teleportAudio.play().catch(() => {});
     const sectionId = region.dataset.section;
 
     // Flash effect on click
@@ -108,6 +111,7 @@ regions.forEach(region => {
 const audio     = document.getElementById('ambientAudio');
 const audioBtn  = document.getElementById('audioToggle');
 const audioIcon = document.getElementById('audioIcon');
+const teleportAudio = document.getElementById('teleportAudio');
 let   audioOn   = false;
 
 audioBtn.addEventListener('click', () => {
